@@ -16,13 +16,13 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
         <p className='Card--body-text'>{post.body}</p><br/>
         <p className='Card--body-text-2'>Dag van de week: {post.day}</p>
       </div>
-      <button className='Card__button' onClick={() => deletePost(post.id)}>
-        Delete
-      </button>
         {Rating(post.rating)}
     </div>
   )
 }
+      // <button className='Card__button' onClick={() => deletePost(post.id)}>
+      //   Delete
+      // </button>
 
 function Rating(stars) {
     return (

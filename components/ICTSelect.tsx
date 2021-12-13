@@ -5,12 +5,18 @@ const options = [
     { value: 'rating', label: 'Hoogst aantal sterren' },
     { value: 'rating_reverse', label: 'Laagst aantal sterren' },
     { value: 'strawberry', label: 'Naam' },
-    { value: 'vanilla', label: 'Dag van de week' }
+    { value: 'vanilla', label: 'Dag' }
 ]
 
 const ICTSelect = () => {
     return (
-        <Select options={options} />
+        <form className='Form'>
+            <div>
+                <div className='Form--field'>
+                    <Select options={options} />
+                </div>
+            </div>
+        </form>
     )
 }
 

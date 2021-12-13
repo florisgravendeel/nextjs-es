@@ -13,6 +13,7 @@ export default function IndexPage({
   const addPost = async (e: React.FormEvent, formData: ICard) => {
     e.preventDefault()
     const post: ICard = {
+      rating: 0,
       day: "IDK",
       id: Math.random(),
       title: formData.title,
@@ -30,10 +31,17 @@ export default function IndexPage({
 
   if (!cardList) return <h1>Loading...</h1>
 
+  const [sortType, setSortType] = useState('albums');
+
   return (
     <main className='container'>
       <h1>Open-ICT Richtingen</h1>
       <ICTSelect/>
+      <select onChange={(e) => setSortType(e.target.value)}>
+        <option value="name">Naam</option>
+        <option value="rating">Beoordeling (slechtste naar beste)</option>
+        <option value="rating-reverse">Beoordeling (beste naar slechtse)</option>
+      </select>
       <AddPost savePost={addPost} />
       {cardList.map((post: ICard) => (
         <ICTCard key={post.id} deletePost={deletePost} post={post} />
