@@ -1,52 +1,54 @@
 import * as React from 'react'
 import { InferGetStaticPropsType } from 'next'
 import AddPost from '../components/AddPost'
-import Post from '../components/Post'
-import { IPost } from '../types'
-
-const BASE_URL: string = 'https://jsonplaceholder.typicode.com/posts'
+import ICTCard from '../components/ICTCard'
+import ICTSelect from '../components/ICTSelect'
+import { ICard } from '../types'
 
 export default function IndexPage({
-  posts,
+  cards,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const [postList, setPostList] = React.useState(posts)
+  const [cardList, setCardList] = React.useState(cards)
 
-  const addPost = async (e: React.FormEvent, formData: IPost) => {
+  const addPost = async (e: React.FormEvent, formData: ICard) => {
     e.preventDefault()
-    const post: IPost = {
+    const post: ICard = {
+      day: "IDK",
       id: Math.random(),
       title: formData.title,
-      body: formData.body,
+      body: formData.body
     }
-    setPostList([post, ...postList])
+    setCardList([post, ...cardList])
   }
 
   const deletePost = async (id: number) => {
-    const posts: IPost[] = postList.filter((post: IPost) => post.id !== id)
-    console.log(posts)
-    setPostList(posts)
+    const cards: ICard[] = cardList.filter((post: ICard) => post.id !== id)
+    console.log(cards)
+
+    setCardList(cards)
   }
 
-  if (!postList) return <h1>Loading...</h1>
+  if (!cardList) return <h1>Loading...</h1>
 
   return (
     <main className='container'>
-      <h1>My posts</h1>
+      <h1>Open-ICT Richtingen</h1>
+      <ICTSelect/>
       <AddPost savePost={addPost} />
-      {postList.map((post: IPost) => (
-        <Post key={post.id} deletePost={deletePost} post={post} />
+      {cardList.map((post: ICard) => (
+        <ICTCard key={post.id} deletePost={deletePost} post={post} />
       ))}
     </main>
   )
 }
 
 export async function getStaticProps() {
-  const res = await fetch(BASE_URL)
-  const posts: IPost[] = await res.json()
+  const res = await fetch('http://localhost:3000/api/ict-info')
+  const cards: ICard[] = await res.json()
 
   return {
     props: {
-      posts,
+      cards,
     },
   }
 }
