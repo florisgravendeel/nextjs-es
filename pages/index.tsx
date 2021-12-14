@@ -13,6 +13,8 @@ export default function IndexPage({
   const addPost = async (e: React.FormEvent, formData: ICard) => {
     e.preventDefault()
     const post: ICard = {
+      day_value: 0,
+      guild_leader: "",
       rating: 0,
       day: "IDK",
       id: Math.random(),
@@ -33,7 +35,25 @@ export default function IndexPage({
 
 
   function setSortType(sortValue: string) {
+    const cards = cardList.slice()
     console.log(sortValue)
+    switch (sortValue) {
+      case "rating":
+        cards.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+        break;
+      case "rating-reverse":
+        cards.sort((a, b) => (a.rating > b.rating) ? -1 : 1)
+        break;
+      case "name":
+        cards.sort((a, b) => (a.title > b.title) ? 1 : -1)
+        break;
+      case "day":
+        cards.sort((a, b) => (a.day_value > b.day_value) ? 1 : -1)
+        break;
+      default:
+        break;
+    }
+    setCardList(cards)
   }
 
   return (
@@ -43,7 +63,8 @@ export default function IndexPage({
       <select onChange={(e) => setSortType(e.target.value)}>
         <option value="name">Naam</option>
         <option value="rating">Beoordeling (slechtste naar beste)</option>
-        <option value="rating-reverse">Beoordeling (beste naar slechtse)</option>
+        <option value="rating-reverse">Beoordeling (beste naar slechtste)</option>
+        <option value="day">Dag</option>
       </select>
       <AddPost savePost={addPost} />
       {cardList.map((post: ICard) => (

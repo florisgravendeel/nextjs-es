@@ -17,10 +17,14 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
         <p className='Card--body-text-2'>Gilde: {post.day}</p>
         <p className='Card--body-text-2'>Gildemeester: {post.guild_leader}</p>
       </div>
+        <div className='stars'>
+            Beoordeling
         {Rating(post.rating)}
+        </div>
     </div>
   )
 }
+
       // <button className='Card__button' onClick={() => deletePost(post.id)}>
       //   Delete
       // </button>
@@ -33,7 +37,7 @@ function Rating(stars) {
             size={24}
             activeColor="#ffd700"
             value={stars}
-            edit={false}
+            edit={true}
         />
     )
 }

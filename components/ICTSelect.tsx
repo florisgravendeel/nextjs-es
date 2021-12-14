@@ -4,8 +4,8 @@ import Select from 'react-select'
 const options = [
     { value: 'rating', label: 'Hoogst aantal sterren' },
     { value: 'rating_reverse', label: 'Laagst aantal sterren' },
-    { value: 'strawberry', label: 'Naa2m' },
-    { value: 'vanilla', label: 'Dag' }
+    { value: 'name', label: 'Naam' },
+    { value: 'day', label: 'Dag' }
 ]
 
 const ICTSelect = () => {
@@ -13,7 +13,7 @@ const ICTSelect = () => {
         <form className='Form'>
             <div>
                 <div className='Form--field'>
-                    <Select options={options} instanceId={"as25jbba422apq"} />
+                    <Select options={options} instanceId={"as25jbba422apq"} onChange={(e) => console.log(e)}/>
                 </div>
             </div>
         </form>
