@@ -2,8 +2,15 @@ import * as React from 'react'
 import { InferGetStaticPropsType } from 'next'
 import AddPost from '../components/AddPost'
 import ICTCard from '../components/ICTCard'
-import ICTSelect from '../components/ICTSelect'
 import { ICard } from '../types'
+import Select from "react-select";
+
+const options = [
+  { value: 'name', label: 'Naam' },
+  { value: 'day', label: 'Dag' },
+  { value: 'rating', label: 'Laagst aantal sterren' },
+  { value: 'rating-reverse', label: 'Hoogst aantal sterren' }
+]
 
 export default function IndexPage({
   cards,
@@ -59,14 +66,14 @@ export default function IndexPage({
   return (
     <main className='container'>
       <h1>Open-ICT Richtingen</h1>
-      <ICTSelect/>
-      <select onChange={(e) => setSortType(e.target.value)}>
-        <option value="name">Naam</option>
-        <option value="rating">Beoordeling (slechtste naar beste)</option>
-        <option value="rating-reverse">Beoordeling (beste naar slechtste)</option>
-        <option value="day">Dag</option>
-      </select>
-      <AddPost savePost={addPost} />
+      <form className='Form'>
+        <div>
+          <div className='Form--field'>
+            <Select options={options} instanceId={"as25jbba422apq"} onChange={(ev) => setSortType(ev.value)}/>
+          </div>
+        </div>
+      </form>
+      {/*<AddPost savePost={addPost} />*/}
       {cardList.map((post: ICard) => (
         <ICTCard key={post.id} deletePost={deletePost} post={post} />
       ))}
