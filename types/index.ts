@@ -6,5 +6,4 @@ export interface ICard {
   day_value: number
   rating: number
   guild_leader: string
-
 }

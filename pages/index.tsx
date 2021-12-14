@@ -4,9 +4,10 @@ import ICTCard from '../components/ICTCard'
 import { ICard } from '../types'
 import Select from "react-select";
 
-const options = [
+const sortOptions = [
   { value: 'name', label: 'Naam' },
   { value: 'day', label: 'Dag' },
+  { value: 'mentor', label: 'Gildemeester' },
   { value: 'rating', label: 'Laagst aantal sterren' },
   { value: 'rating-reverse', label: 'Hoogst aantal sterren' }
 ]
@@ -17,7 +18,7 @@ export default function IndexPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [cardList, setCardList] = React.useState(cards)
 
-  const deletePost = async (id: number, rating) => {
+  const changeCardRating = async (id: number, rating) => {
     // const cards: ICard[] = cardList.filter((post: ICard) => post.id !== id)
     const cards = cardList.slice()
     // get card with id, and edit rating.
@@ -36,11 +37,9 @@ export default function IndexPage({
 
   if (!cardList) return <h1>Loading...</h1>
 
-
   function setSortType(sortValue: string) {
     const cards = cardList.slice()
     latestSortValue = sortValue
-    console.log(sortValue)
     switch (sortValue) {
       case "rating":
         cards.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
@@ -54,6 +53,9 @@ export default function IndexPage({
       case "day":
         cards.sort((a, b) => (a.day_value > b.day_value) ? 1 : -1)
         break;
+      case "mentor":
+        cards.sort((a, b) => (a.guild_leader > b.guild_leader) ? 1 : -1)
+        break;
       default:
         break;
     }
@@ -66,12 +68,12 @@ export default function IndexPage({
       <form className='Form'>
         <div>
           <div className='Form--field'>
-            <Select options={options} instanceId={"as25jbba422apq"} onChange={(ev) => setSortType(ev.value)}/>
+            <Select options={sortOptions} instanceId={"as25jbba422apq"} onChange={(ev) => setSortType(ev.value)}/>
           </div>
         </div>
       </form>
       {cardList.map((post: ICard) => (
-        <ICTCard key={post.id} deletePost={deletePost} post={post} />
+        <ICTCard key={post.id} changeCardRating={changeCardRating} post={post} />
       ))}
     </main>
   )

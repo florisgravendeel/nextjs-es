@@ -2,16 +2,15 @@ import * as React from 'react'
 import { ICard } from '../types'
 import ReactStars from "react-rating-stars-component";
 
-
 type Props = {
   post: ICard
-  deletePost: (id: number, stars: number) => void
+  changeCardRating: (id: number, stars: number) => void
 }
 
-const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
+const ICTCard: React.FC<Props> = ({ post, changeCardRating }) => {
 
     const ratingChanged = (newRating) => {
-        deletePost(post.id, newRating)
+        changeCardRating(post.id, newRating)
     }
 
     return (
@@ -36,9 +35,5 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
     </div>
   )
 }
-
-      // <button className='Card__button' onClick={() => deletePost(post.id)}>
-      //   Delete
-      // </button>
 
 export default ICTCard
