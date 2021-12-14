@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { InferGetStaticPropsType } from 'next'
-import AddPost from '../components/AddPost'
 import ICTCard from '../components/ICTCard'
 import { ICard } from '../types'
 import Select from "react-select";
@@ -11,30 +10,27 @@ const options = [
   { value: 'rating', label: 'Laagst aantal sterren' },
   { value: 'rating-reverse', label: 'Hoogst aantal sterren' }
 ]
+let latestSortValue = null
 
 export default function IndexPage({
   cards,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [cardList, setCardList] = React.useState(cards)
 
-  const addPost = async (e: React.FormEvent, formData: ICard) => {
-    e.preventDefault()
-    const post: ICard = {
-      day_value: 0,
-      guild_leader: "",
-      rating: 0,
-      day: "IDK",
-      id: Math.random(),
-      title: formData.title,
-      body: formData.body
+  const deletePost = async (id: number, rating) => {
+    // const cards: ICard[] = cardList.filter((post: ICard) => post.id !== id)
+    const cards = cardList.slice()
+    // get card with id, and edit rating.
+    for (var i = 0; i < cards.length; i++){
+      if (cards[i].id == id){
+        cards[i].rating = rating;
+        break;
+      }
     }
-    setCardList([post, ...cardList])
-  }
-
-  const deletePost = async (id: number) => {
-    const cards: ICard[] = cardList.filter((post: ICard) => post.id !== id)
-    console.log(cards)
-
+    if (latestSortValue != null){
+      setSortType(latestSortValue)
+      return
+    }
     setCardList(cards)
   }
 
@@ -43,6 +39,7 @@ export default function IndexPage({
 
   function setSortType(sortValue: string) {
     const cards = cardList.slice()
+    latestSortValue = sortValue
     console.log(sortValue)
     switch (sortValue) {
       case "rating":
@@ -73,7 +70,6 @@ export default function IndexPage({
           </div>
         </div>
       </form>
-      {/*<AddPost savePost={addPost} />*/}
       {cardList.map((post: ICard) => (
         <ICTCard key={post.id} deletePost={deletePost} post={post} />
       ))}

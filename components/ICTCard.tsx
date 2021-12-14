@@ -5,11 +5,16 @@ import ReactStars from "react-rating-stars-component";
 
 type Props = {
   post: ICard
-  deletePost: (id: number) => void
+  deletePost: (id: number, stars: number) => void
 }
 
 const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
-  return (
+
+    const ratingChanged = (newRating) => {
+        deletePost(post.id, newRating)
+    }
+
+    return (
     <div className='Card'>
       <div className='Card--body'>
         <h1 className='Card--body-title'>{post.title}</h1>
@@ -19,7 +24,14 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
       </div>
         <div className='stars'>
             Beoordeling
-        {Rating(post.rating)}
+            <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={24}
+                activeColor="#ffd700"
+                value={post.rating}
+                edit={true}
+            />
         </div>
     </div>
   )
@@ -28,22 +40,5 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
       // <button className='Card__button' onClick={() => deletePost(post.id)}>
       //   Delete
       // </button>
-
-function Rating(stars) {
-    return (
-        <ReactStars
-            count={5}
-            onChange={ratingChanged}
-            size={24}
-            activeColor="#ffd700"
-            value={stars}
-            edit={true}
-        />
-    )
-}
-const ratingChanged = (newRating) => {
-    console.log(newRating);
-};
-
 
 export default ICTCard
