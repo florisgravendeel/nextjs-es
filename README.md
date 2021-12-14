@@ -23,6 +23,10 @@ npm run dev
 # or
 yarn dev
 ```
+Of wacht dat je van deze: 
+```bash
+yarn add --dev typescript @types/react @types/node
+```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

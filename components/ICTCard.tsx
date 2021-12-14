@@ -14,7 +14,8 @@ const ICTCard: React.FC<Props> = ({ post, deletePost }) => {
       <div className='Card--body'>
         <h1 className='Card--body-title'>{post.title}</h1>
         <p className='Card--body-text'>{post.body}</p><br/>
-        <p className='Card--body-text-2'>Dag van de week: {post.day}</p>
+        <p className='Card--body-text-2'>Gilde: {post.day}</p>
+        <p className='Card--body-text-2'>Gildemeester: {post.guild_leader}</p>
       </div>
         {Rating(post.rating)}
     </div>

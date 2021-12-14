@@ -31,7 +31,10 @@ export default function IndexPage({
 
   if (!cardList) return <h1>Loading...</h1>
 
-  const [sortType, setSortType] = useState('albums');
+
+  function setSortType(sortValue: string) {
+    console.log(sortValue)
+  }
 
   return (
     <main className='container'>

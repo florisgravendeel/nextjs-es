@@ -4,6 +4,7 @@ export interface ICard {
   body: string
   day: string
   rating: number
+  guild_leader: string
   /*
      gilde: dag van de week
      gilde-meester
