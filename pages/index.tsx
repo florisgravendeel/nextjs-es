@@ -64,7 +64,7 @@ export default function IndexPage({
 
   return (
     <main className='container'>
-      <h1>Open-ICT Richtingen</h1>
+      <h1>Rate de Open-ICT Richtingen!</h1>
       <form className='Form'>
         <div>
           <div className='Form--field'>
