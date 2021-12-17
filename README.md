@@ -4,7 +4,7 @@
 Dit is een [Next.js](https://nextjs.org/) project gemaakt (bootstrapped) met [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 
-Zet Typescript aan (als je dat nog niet had gedaan).
+Zet Typescript aan:
 ```bash
 yarn add --dev typescript @types/react @types/node
 ```
